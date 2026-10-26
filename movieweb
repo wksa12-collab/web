@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>WARM REEL</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>WARM REEL</h1>
+
+        <nav>
+
+            <a href="index.html">HOME</a>
+            <a href="#films">FILMS</a>
+            <a href="collection.html">MY COLLECTION</a>
+            <a href="today.html">TODAY'S REEL</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <p class="small">FILMS THAT STAY WITH YOU</p>
+
+                <h2>
+                    영화가 끝난 뒤에도<br>
+                    마음에 남는 이야기
+                </h2>
+
+                <p class="desc">
+                    따뜻함과 위로, 그리고 작은 깨달음을
+                    남겨주는 영화들을 소개합니다.
+                </p>
+
+                <button>EXPLORE FILMS</button>
+
+            </div>
+
+        </section>
+
+
+        <div class="newsbox">
+            <div class="textbox">
+                <h2>오늘은 어떤 하루를 보내셨나요?</h2>
+                <p>날씨에 맞는 영화를 추천 받아 보세요.</p>
+            </div>
+
+            <div class="bt">추천 받기</div>
+        </div>
+
+
+
+
+        <!-- MOVIES -->
+
+        <section
+            class="movies"
+            id="films"
+        >
+
+            <div class="section-title">
+
+                <p>WARM COLLECTION</p>
+
+                <h2>오늘의 영화</h2>
+
+            </div>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="search"
+                    placeholder="영화 제목을 검색해보세요"
+                >
+
+                <button id="searchBtn">검색</button>
+
+            </div>
+
+            <div class="filter-box">
+
+                <button class="filter active" data-filter="전체">전체</button>
+                <button class="filter" data-filter="가족">가족</button>
+                <button class="filter" data-filter="사랑">사랑</button>
+                <button class="filter" data-filter="우정">우정</button>
+                <button class="filter" data-filter="성장">성장</button>
+                <button class="filter" data-filter="희망">희망</button>
+                <button class="filter" data-filter="꿈">꿈</button>
+                <button class="filter" data-filter="용기">용기</button>
+
+            </div>
+
+            <div class="sort-box">
+
+                <label for="sort">정렬</label>
+
+                <select id="sort">
+
+                    <option value="default">기본순</option>
+                    <option value="high">평점 높은순</option>
+                    <option value="low">평점 낮은순</option>
+
+                </select>
+
+            </div>
+
+        <div class="movie-list"></div>
+
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+
+    background: #F5F0E8;
+    color: #3E3028;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: #F5F0E8;
+}
+
+header h1 {
+    font-size: 24px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #8B5E3C;
+}
+
+nav {
+    display: flex;
+    gap: 40px;
+}
+
+nav a {
+    text-decoration: none;
+
+    color: #3E3028;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #8B5E3C;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 620px;
+
+    margin: 0 5%;
+
+    border-radius: 30px;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            #E7D5C2 0%,
+            #EADCCB 45%,
+            #F2E9DD 100%
+        );
+}
+
+.hero-text {
+    margin-left: 9%;
+
+    max-width: 600px;
+}
+
+.hero-text .small {
+    margin-bottom: 25px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    color: #8B5E3C;
+}
+
+.hero h2 {
+    font-size: 56px;
+    line-height: 1.25;
+
+    font-weight: 700;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 25px;
+}
+
+.hero .desc {
+    font-size: 16px;
+    line-height: 1.8;
+
+    color: #705A4A;
+
+    margin-bottom: 35px;
+}
+
+.hero button {
+    border: none;
+
+    padding: 15px 28px;
+
+    border-radius: 30px;
+
+    background: #8B5E3C;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.hero button:hover {
+    background: #6F472C;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   newsbox
+========================= */
+
+.newsbox{
+    height: 130px;
+    margin: 30px;
+    
+    border-radius: 35px;
+
+    background: #f7e1be;
+
+    text-align: center;
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.newsbox .textbox{
+    margin: 20px 50px;
+}
+
+.newsbox .textbox h2{
+    font-size: 20px;
+
+    margin-bottom: 20px;
+
+}
+
+.newsbox .textbox p{
+    font-size: 12px;
+
+}
+
+.newsbox .bt{
+    width: 50%;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+
+/* =========================
+   MOVIES
+========================= */
+
+.movies {
+    padding: 120px 7%;
+}
+
+.section-title {
+    margin-bottom: 50px;
+}
+
+.section-title p {
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    color: #A47A58;
+
+    margin-bottom: 10px;
+}
+
+.section-title h2 {
+    font-size: 36px;
+
+    letter-spacing: -1px;
+}
+
+
+/* =========================
+   MOVIE LIST
+========================= */
+
+.movie-list {
+    display: flex;
+
+    gap: 25px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding: 10px 5px 25px;
+
+    cursor: grab;
+
+    scrollbar-width: none;
+
+    user-select: none;
+
+    touch-action: pan-y;
+}
+
+.movie-list::-webkit-scrollbar {
+    display: none;
+}
+
+.movie-list:active {
+    cursor: grabbing;
+}
+
+
+/* =========================
+   MOVIE CARD
+========================= */
+
+.movie-card {
+    flex: 0 0 300px;
+
+    background: #FFFDF9;
+
+    padding: 12px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    transition: transform 0.3s;
+}
+
+.movie-card:hover {
+    transform: translateY(-8px);
+}
+
+
+/* =========================
+   MOVIE IMAGE
+========================= */
+
+.img-box {
+    width: 100%;
+    height: 360px;
+
+    margin-bottom: 18px;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    background: #E8DED2;
+}
+
+.img-box img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+}
+
+
+/* =========================
+   MOVIE TEXT
+========================= */
+
+.movie-card h3 {
+    margin: 0 8px 7px;
+
+    font-size: 17px;
+
+    letter-spacing: 0.5px;
+}
+
+.movie-card p {
+    margin: 0 8px 12px;
+
+    font-size: 13px;
+
+    color: #927965;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .hero {
+        min-height: 520px;
+    }
+
+    .hero h2 {
+        font-size: 42px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    header {
+        height: 75px;
+
+        padding: 0 5%;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+
+    .hero {
+        margin: 0 4%;
+
+        min-height: 500px;
+
+        border-radius: 22px;
+    }
+
+    .hero-text {
+        margin-left: 8%;
+        margin-right: 8%;
+    }
+
+    .hero h2 {
+        font-size: 34px;
+    }
+
+    .hero .desc {
+        font-size: 14px;
+    }
+
+
+    .movies {
+        padding: 80px 5%;
+    }
+
+    .section-title h2 {
+        font-size: 28px;
+    }
+
+
+    .movie-card {
+        flex: 0 0 250px;
+    }
+
+    .img-box {
+        height: 350px;
+    }
+
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+    display: flex;
+
+    width: 100%;
+    max-width: 500px;
+
+    margin-bottom: 40px;
+}
+
+.search-box input {
+    flex: 1;
+
+    height: 50px;
+
+    padding: 0 20px;
+
+    border: 1px solid #D8C9BA;
+    border-radius: 25px 0 0 25px;
+
+    background: #FFFDF9;
+
+    color: #3E3028;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+
+    outline: none;
+}
+
+.search-box input:focus {
+    border-color: #8B5E3C;
+}
+
+.search-box button {
+    width: 80px;
+
+    border: none;
+
+    border-radius: 0 25px 25px 0;
+
+    background: #8B5E3C;
+    color: white;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background: #6F472C;
+}
+
+/* =========================
+   FILTER
+========================= */
+
+.filter-box {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 35px;
+
+    flex-wrap: wrap;
+}
+
+.filter {
+    padding: 10px 18px;
+
+    border: 1px solid #D8C9BA;
+
+    border-radius: 20px;
+
+    background: #FFFDF9;
+
+    color: #705A4A;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.filter:hover {
+    border-color: #8B5E3C;
+
+    color: #8B5E3C;
+}
+
+.filter.active {
+    background: #8B5E3C;
+
+    border-color: #8B5E3C;
+
+    color: white;
+}
+
+/* =========================
+   SORT
+========================= */
+
+.sort-box {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 30px;
+}
+
+.sort-box label {
+    font-size: 13px;
+
+    color: #705A4A;
+}
+
+.sort-box select {
+    padding: 9px 12px;
+
+    border: 1px solid #D8C9BA;
+
+    border-radius: 20px;
+
+    background: #FFFDF9;
+
+    color: #3E3028;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 13px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.sort-box select:focus {
+    border-color: #8B5E3C;
+}
+
+
+/* =========================
+   MOVIE DETAIL
+========================= */
+
+.detail {
+    min-height: calc(100vh - 90px);
+
+    padding: 90px 10%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 90px;
+}
+
+
+/* =========================
+   DETAIL IMAGE
+========================= */
+
+.detail-img {
+    flex: 0 0 360px;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    background: #E8DED2;
+
+    box-shadow:
+        0 25px 60px rgba(62, 48, 40, 0.15);
+}
+
+.detail-img img {
+    width: 100%;
+
+    display: block;
+
+    aspect-ratio: 2 / 3;
+
+    object-fit: cover;
+}
+
+
+/* =========================
+   DETAIL INFO
+========================= */
+
+.detail-info {
+    max-width: 650px;
+}
+
+
+.detail-small {
+    margin-bottom: 18px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+    color: #A47A58;
+}
+
+
+.detail-info h2 {
+    margin-bottom: 10px;
+
+    font-size: 52px;
+
+    line-height: 1.25;
+
+    letter-spacing: -2px;
+
+    color: #3E3028;
+}
+
+
+.detail-original {
+    margin-bottom: 25px;
+
+    font-size: 14px;
+
+    color: #927965;
+}
+
+
+/* =========================
+   RATING
+========================= */
+
+.detail-rating {
+    display: inline-block;
+
+    margin-bottom: 25px;
+
+    padding: 8px 16px;
+
+    border-radius: 20px;
+
+    background: #8B5E3C;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   KEYWORD
+========================= */
+
+.detail-keyword {
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 35px;
+}
+
+
+.detail-keyword span {
+    padding: 8px 15px;
+
+    border: 1px solid #D8C9BA;
+
+    border-radius: 20px;
+
+    background: #FFFDF9;
+
+    color: #705A4A;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   LINE
+========================= */
+
+.detail-line {
+    width: 100%;
+
+    height: 1px;
+
+    margin-bottom: 30px;
+
+    background: #D8C9BA;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.detail-info h3 {
+    margin-bottom: 18px;
+
+    font-size: 20px;
+
+    font-weight: 600;
+}
+
+
+.detail-desc {
+    margin-bottom: 15px;
+
+    font-size: 15px;
+
+    line-height: 1.9;
+
+    color: #705A4A;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-btn {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 14px 24px;
+
+    border-radius: 30px;
+
+    background: #8B5E3C;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+
+.back-btn:hover {
+    background: #6F472C;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   DETAIL RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .detail {
+        padding: 70px 7%;
+
+        gap: 50px;
+    }
+
+
+    .detail-img {
+        flex: 0 0 300px;
+    }
+
+
+    .detail-info h2 {
+        font-size: 40px;
+    }
+
+}
+
+
+/* =========================
+   DETAIL MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .detail {
+        min-height: auto;
+
+        padding: 50px 7% 80px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 40px;
+    }
+
+
+    .detail-img {
+        width: 75%;
+
+        max-width: 300px;
+
+        margin: 0 auto;
+    }
+
+
+    .detail-info h2 {
+        font-size: 34px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .detail-small {
+        font-size: 11px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .detail-desc {
+        font-size: 14px;
+
+        line-height: 1.8;
+    }
+
+
+    .detail-keyword {
+        flex-wrap: wrap;
+    }
+
+}
+
+/* =========================
+   LIKE BUTTON
+========================= */
+
+.movie-card {
+    position: relative;
+}
+
+.like-btn {
+    position: absolute;
+
+    top: 25px;
+    right: 25px;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 253, 249, 0.9);
+
+    color: #8B5E3C;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+    transition: 0.3s;
+}
+
+.like-btn:hover {
+    transform: scale(1.1);
+
+    background: #8B5E3C;
+
+    color: white;
+}
+
+.like-btn.liked {
+    background: #8B5E3C;
+
+    color: white;
+}
+
+/* =========================
+   MY COLLECTION
+========================= */
+
+.collection {
+    min-height: calc(100vh - 90px);
+
+    padding: 100px 7%;
+}
+
+
+/* =========================
+   COLLECTION DESCRIPTION
+========================= */
+
+.collection-desc {
+    margin-top: -25px;
+    margin-bottom: 50px;
+
+    font-size: 15px;
+    line-height: 1.8;
+
+    color: #705A4A;
+}
+
+
+/* =========================
+   COLLECTION LIST
+========================= */
+
+.collection-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(230px, 1fr));
+
+    gap: 25px;
+}
+
+
+/* =========================
+   COLLECTION CARD
+========================= */
+
+.collection-card {
+    background: #FFFDF9;
+
+    padding: 12px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 10px 30px rgba(62, 48, 40, 0.08);
+}
+
+
+.collection-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 20px 40px rgba(62, 48, 40, 0.15);
+}
+
+
+/* =========================
+   COLLECTION IMAGE
+========================= */
+
+.collection-img {
+    width: 100%;
+
+    aspect-ratio: 2 / 3;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background: #E8DED2;
+}
+
+
+.collection-img img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================
+   COLLECTION TEXT
+========================= */
+
+.collection-card h3 {
+    margin: 18px 8px 7px;
+
+    font-size: 17px;
+
+    letter-spacing: 0.5px;
+}
+
+
+.collection-card p {
+    margin: 0 8px 12px;
+
+    font-size: 13px;
+
+    color: #927965;
+}
+
+
+.collection-card span {
+    display: inline-block;
+
+    margin: 0 8px 10px;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    background: #F2E9DD;
+
+    color: #8B5E3C;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   EMPTY MESSAGE
+========================= */
+
+.empty-message {
+    display: none;
+
+    padding: 80px 20px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background: #FFFDF9;
+}
+
+
+.empty-message p {
+    margin-bottom: 25px;
+
+    font-size: 16px;
+
+    color: #705A4A;
+}
+
+
+.empty-message a {
+    display: inline-block;
+
+    padding: 13px 24px;
+
+    border-radius: 30px;
+
+    background: #8B5E3C;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+
+.empty-message a:hover {
+    background: #6F472C;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   COLLECTION MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .collection {
+        padding: 70px 5%;
+    }
+
+
+    .collection-list {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 15px;
+    }
+
+
+    .collection-card {
+        padding: 8px;
+    }
+
+
+    .collection-card h3 {
+        margin: 12px 5px 6px;
+
+        font-size: 14px;
+    }
+
+
+    .collection-card p {
+        margin: 0 5px 10px;
+
+        font-size: 11px;
+    }
+
+
+    .collection-card span {
+        margin: 0 5px 8px;
+
+        font-size: 11px;
+    }
+
+}
+
+/* =========================
+   COLLECTION LIKE BUTTON
+========================= */
+
+.collection-card {
+    position: relative;
+}
+
+.collection-like-btn {
+    position: absolute;
+
+    top: 22px;
+    right: 22px;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 253, 249, 0.92);
+
+    color: #8B5E3C;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+    transition: 0.3s;
+}
+
+.collection-like-btn:hover {
+    transform: scale(1.1);
+}
+
+.collection-like-btn.liked {
+    background: #8B5E3C;
+
+    color: white;
+}
+console.log("WARM REEL JS");
+
+
+/* =========================
+   MOVIE LIST
+========================= */
+
+const movieList =
+    document.querySelector(".movie-list");
+
+
+/* =========================
+   MOVIE DATA
+========================= */
+
+const movies = [
+
+    {
+        title: "GREEN BOOK",
+        image: "img/green.jpg",
+        keyword: "우정 · 편견 · 이해",
+        rating: 8.2,
+        page: "green.html"
+    },
+
+    {
+        title: "THE INTERN",
+        image: "img/intern.jpg",
+        keyword: "성장 · 배려 · 새로운 시작",
+        rating: 7.1,
+        page: "intern.html"
+    },
+
+    {
+        title: "FORREST GUMP",
+        image: "img/forest.jpg",
+        keyword: "인생 · 사랑 · 순수함",
+        rating: 8.8,
+        page: "forest.html"
+    },
+
+    {
+        title: "ABOUT TIME",
+        image: "img/about.jpg",
+        keyword: "가족 · 사랑 · 현재",
+        rating: 7.8,
+        page: "about.html"
+    },
+
+    {
+        title: "GOOD WILL HUNTING",
+        image: "img/goodwill.jpg",
+        keyword: "성장 · 상처 · 우정",
+        rating: 8.4,
+        page: "goodwill.html"
+    },
+
+    {
+        title: "DEAD POETS SOCIETY",
+        image: "img/poet.jpg",
+        keyword: "꿈 · 용기 · 자유",
+        rating: 8.1,
+        page: "poet.html"
+    },
+
+    {
+        title: "THE SHAWSHANK REDEMPTION",
+        image: "img/shaw.jpg",
+        keyword: "희망 · 자유 · 인내",
+        rating: 9.3,
+        page: "shaw.html"
+    },
+
+    {
+        title: "BIG FISH",
+        image: "img/bigfish.jpg",
+        keyword: "가족 · 이해 · 추억",
+        rating: 7.9,
+        page: "bigfish.html"
+    },
+
+    {
+        title: "THE SECRET LIFE OF WALTER MITTY",
+        image: "img/walter.jpg",
+        keyword: "모험 · 용기 · 변화",
+        rating: 7.3,
+        page: "walter.html"
+    },
+
+    {
+        title: "LIFE IS BEAUTIFUL",
+        image: "img/life.jpg",
+        keyword: "가족 · 사랑 · 희망",
+        rating: 8.6,
+        page: "life.html"
+    },
+
+    {
+        title: "PATCH ADAMS",
+        image: "img/patch.jpg",
+        keyword: "공감 · 웃음 · 삶",
+        rating: 6.9,
+        page: "patch.html"
+    },
+
+    {
+        title: "WONDER",
+        image: "img/wonder.jpg",
+        keyword: "가족 · 배려 · 편견",
+        rating: 7.9,
+        page: "wonder.html"
+    },
+
+    {
+        title: "LITTLE WOMEN",
+        image: "img/little.jpg",
+        keyword: "가족 · 성장 · 사랑",
+        rating: 7.7,
+        page: "little.html"
+    },
+
+    {
+        title: "3 IDIOTS",
+        image: "img/3idiots.jpg",
+        keyword: "우정 · 꿈 · 행복",
+        rating: 8.4,
+        page: "3idiots.html"
+    },
+
+    {
+        title: "MY GIRL",
+        image: "img/friend.jpg",
+        keyword: "우정 · 이별 · 성장",
+        rating: 6.9,
+        page: "friend.html"
+    },
+
+    {
+        title: "MARATHON",
+        image: "img/marathon.jpg",
+        keyword: "가족 · 도전 · 성장",
+        rating: 7.6,
+        page: "marathon.html"
+    },
+
+    {
+        title: "I CAN SPEAK",
+        image: "img/speak.jpg",
+        keyword: "용기 · 이해 · 화해",
+        rating: 7.5,
+        page: "speak.html"
+    },
+
+    {
+        title: "LITTLE FOREST",
+        image: "img/littleforest.jpg",
+        keyword: "휴식 · 일상 · 행복",
+        rating: 7.3,
+        page: "littleforest.html"
+    },
+
+    {
+        title: "MIRACLE WORKER",
+        image: "img/miracle.jpg",
+        keyword: "희망 · 교육 · 극복",
+        rating: 8.1,
+        page: "miracle.html"
+    },
+
+    {
+        title: "CODA",
+        image: "img/coda.jpg",
+        keyword: "가족 · 꿈 · 이해",
+        rating: 8.0,
+        page: "coda.html"
+    }
+
+];
+
+/* =========================
+   FAVORITE MOVIES
+========================= */
+
+let favorites =
+    JSON.parse(
+        localStorage.getItem("favorites")
+    ) || [];
+
+
+console.log("영화 개수:", movies.length);
+
+
+/* =========================
+   ELEMENT
+========================= */
+
+const search =
+    document.querySelector("#search");
+
+const searchBtn =
+    document.querySelector("#searchBtn");
+
+const filters =
+    document.querySelectorAll(".filter");
+
+const sort =
+    document.querySelector("#sort");
+
+
+/* =========================
+   STATE
+========================= */
+
+let currentFilter = "전체";
+
+let currentSort = "default";
+
+
+/* =========================
+   CREATE MOVIE CARDS
+========================= */
+
+function showMovies(list) {
+
+    movieList.innerHTML = "";
+
+
+    list.forEach(function(movie) {
+
+        const isFavorite =
+            favorites.includes(movie.title);
+
+        const card =
+            document.createElement("div");
+
+
+        card.classList.add("movie-card");
+
+
+        card.innerHTML = `
+
+            <button
+                class="like-btn ${isFavorite ? "liked" : ""}"
+                type="button"
+                aria-label="찜하기"
+            >
+                ${isFavorite ? "♥" : "♡"}
+            </button>
+
+            <div class="img-box">
+
+                <img
+                    src="${movie.image}"
+                    alt="${movie.title}"
+                    draggable="false"
+                >
+
+            </div>
+
+            <h3>
+                ${movie.title}
+            </h3>
+
+            <p>
+                ${movie.keyword}
+            </p>
+
+            <span class="rating">
+                ★ ${movie.rating}
+            </span>
+
+        `;
+
+
+        /* =========================
+           SAVE PAGE
+        ========================= */
+
+        card.dataset.page =
+            movie.page;
+
+
+        movieList.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   SEARCH + FILTER + SORT
+========================= */
+
+function updateMovies() {
+
+    const word =
+        search.value
+            .toLowerCase()
+            .trim();
+
+
+    let result =
+        movies.filter(function(movie) {
+
+
+            const matchSearch =
+                movie.title
+                    .toLowerCase()
+                    .includes(word);
+
+
+            const matchFilter =
+                currentFilter === "전체" ||
+                movie.keyword.includes(
+                    currentFilter
+                );
+
+
+            return (
+                matchSearch &&
+                matchFilter
+            );
+
+        });
+
+
+    /* =========================
+       SORT
+    ========================= */
+
+    if (currentSort === "high") {
+
+        result.sort(function(a, b) {
+
+            return b.rating - a.rating;
+
+        });
+
+    }
+
+
+    if (currentSort === "low") {
+
+        result.sort(function(a, b) {
+
+            return a.rating - b.rating;
+
+        });
+
+    }
+
+
+    showMovies(result);
+
+}
+
+
+/* =========================
+   INITIAL
+========================= */
+
+showMovies(movies);
+
+
+/* =========================
+   SEARCH BUTTON
+========================= */
+
+if (searchBtn) {
+
+    searchBtn.addEventListener(
+        "click",
+        updateMovies
+    );
+
+}
+
+
+/* =========================
+   ENTER SEARCH
+========================= */
+
+if (search) {
+
+    search.addEventListener(
+        "keydown",
+        function(e) {
+
+            if (e.key === "Enter") {
+
+                updateMovies();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+filters.forEach(function(button) {
+
+    button.addEventListener(
+        "click",
+        function() {
+
+
+            filters.forEach(
+                function(btn) {
+
+                    btn.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            currentFilter =
+                button.dataset.filter;
+
+
+            updateMovies();
+
+        }
+    );
+
+});
+
+
+/* =========================
+   SORT
+========================= */
+
+if (sort) {
+
+    sort.addEventListener(
+        "change",
+        function() {
+
+            currentSort =
+                sort.value;
+
+
+            updateMovies();
+
+        }
+    );
+
+}
+
+
+/* =========================
+   DRAG SCROLL
+========================= */
+
+let isDown = false;
+
+let startX = 0;
+
+let startScroll = 0;
+
+let isDragging = false;
+
+
+/* =========================
+   POINTER DOWN
+========================= */
+
+movieList.addEventListener(
+    "pointerdown",
+    function(e) {
+
+        isDown = true;
+
+        isDragging = false;
+
+        startX = e.clientX;
+
+        startScroll =
+            movieList.scrollLeft;
+
+    }
+);
+
+
+/* =========================
+   POINTER MOVE
+========================= */
+
+movieList.addEventListener(
+    "pointermove",
+    function(e) {
+
+        if (!isDown) return;
+
+
+        const move =
+            e.clientX - startX;
+
+
+        /* 드래그 시작 기준 */
+
+        if (Math.abs(move) > 8) {
+
+            isDragging = true;
+
+        }
+
+
+        if (isDragging) {
+
+            movieList.scrollLeft =
+                startScroll - move;
+
+        }
+
+    }
+);
+
+
+/* =========================
+   POINTER UP
+========================= */
+
+movieList.addEventListener(
+    "pointerup",
+    function() {
+
+        isDown = false;
+
+    }
+);
+
+
+/* =========================
+   POINTER LEAVE
+========================= */
+
+movieList.addEventListener(
+    "pointerleave",
+    function() {
+
+        isDown = false;
+
+    }
+);
+
+
+/* =========================
+   POINTER CANCEL
+========================= */
+
+movieList.addEventListener(
+    "pointercancel",
+    function() {
+
+        isDown = false;
+
+        isDragging = false;
+
+    }
+);
+
+
+/* =========================
+   CARD + LIKE CLICK
+========================= */
+
+movieList.addEventListener(
+    "click",
+    function(e) {
+
+        /* =========================
+           LIKE BUTTON
+        ========================= */
+
+        const likeBtn =
+            e.target.closest(".like-btn");
+
+
+       if (likeBtn) {
+
+            const card =
+                likeBtn.closest(".movie-card");
+
+
+            const movieTitle =
+                card.querySelector("h3").textContent.trim();
+
+
+            const favoriteIndex =
+                favorites.indexOf(movieTitle);
+
+
+            if (favoriteIndex === -1) {
+
+                favorites.push(movieTitle);
+
+                likeBtn.classList.add("liked");
+
+                likeBtn.textContent = "♥";
+
+            } else {
+
+                favorites.splice(favoriteIndex, 1);
+
+                likeBtn.classList.remove("liked");
+
+                likeBtn.textContent = "♡";
+
+            }
+
+
+            localStorage.setItem(
+                "favorites",
+                JSON.stringify(favorites)
+            );
+
+
+            return;
+
+        }
+
+
+        /* =========================
+           MOVIE CARD
+        ========================= */
+
+        const card =
+            e.target.closest(".movie-card");
+
+
+        if (!card) return;
+
+
+        /* 드래그였다면 이동하지 않음 */
+
+        if (isDragging) {
+
+            isDragging = false;
+
+            return;
+
+        }
+
+
+        /* DETAIL PAGE */
+
+        const page =
+            card.dataset.page;
+
+
+        if (page) {
+
+            location.href = page;
+
+        }
+
+    }
+);
